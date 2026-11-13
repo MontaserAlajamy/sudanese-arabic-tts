@@ -1,0 +1,6 @@
+[
+ {"id": "spk05", "clip": "spk05_m014_s01_01", "split": "dev", "pitch": "f0 ~194 Hz"},
+ {"id": "spk08", "clip": "spk08_h032_s01_09", "split": "test", "pitch": "f0 ~187 Hz"},
+ {"id": "spk09", "clip": "spk09_p077_s01_02", "split": "dev", "pitch": "f0 ~97 Hz"},
+ {"id": "spk12", "clip": "spk12_s048_s01_01", "split": "test", "pitch": "f0 ~181 Hz"}
+]

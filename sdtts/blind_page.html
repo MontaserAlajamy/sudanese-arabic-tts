@@ -1,0 +1,315 @@
+<title>سمّعني سوداني</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Arabic:wght@400;500;600&family=Noto+Kufi+Arabic:wght@600;700&display=swap">
+<style>
+/* Layout: one sentence per screen (a pager); its hidden voices below it, then back/next. Position survives reloads. */
+:root {
+  --paper: #f3f5f4;
+  --sheet: #ffffff;
+  --ink: #17201d;
+  --muted: #5d6b66;
+  --rule: #d8dfdc;
+  --accent: #0b7a55;      /* the green of the Sudanese flag, darkened for text */
+  --accent-soft: #dcefe6;
+  --warn: #a5491b;
+  --font-head: "Noto Kufi Arabic", "IBM Plex Sans Arabic", Tahoma, sans-serif;
+  --font-body: "IBM Plex Sans Arabic", Tahoma, "Segoe UI", sans-serif;
+  --r: 10px;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --paper: #0f1513; --sheet: #17201d; --ink: #e6ece9; --muted: #9aaba4; --rule: #2a3631;
+    --accent: #3fc28f; --accent-soft: #1d3a2e; --warn: #f0996b; color-scheme: dark;
+  }
+}
+:root[data-theme="dark"] {
+  --paper: #0f1513; --sheet: #17201d; --ink: #e6ece9; --muted: #9aaba4; --rule: #2a3631;
+  --accent: #3fc28f; --accent-soft: #1d3a2e; --warn: #f0996b; color-scheme: dark;
+}
+* { box-sizing: border-box; }
+html { overflow-anchor: none; }
+body {
+  margin: 0; background: var(--paper); color: var(--ink); font: 400 16px/1.6 var(--font-body);
+  padding-left: max(16px, env(safe-area-inset-left, 0px)); padding-right: max(16px, env(safe-area-inset-right, 0px));
+}
+main { max-width: 720px; margin: 0 auto; padding-block: 16px 40px; display: grid; gap: 14px; }
+h1 { font: 700 1.35rem/1.3 var(--font-head); margin: 0; }
+h2 { font: 600 1rem/1.4 var(--font-head); margin: 0; color: var(--muted); }
+p { margin: 0; }
+.lede { display: grid; gap: 6px; color: var(--muted); font-size: .92rem; }
+.lede strong { color: var(--ink); font-weight: 600; }
+.status { display: flex; flex-wrap: wrap; gap: 6px 14px; align-items: center; font-size: .88rem; color: var(--muted); }
+.bar { flex: 1 1 120px; height: 6px; background: var(--rule); border-radius: 3px; overflow: hidden; }
+.bar > i { display: block; height: 100%; width: 0; background: var(--accent); }
+.count { font-variant-numeric: tabular-nums; color: var(--ink); font-weight: 600; }
+.save { font-size: .82rem; }
+.save.bad { color: var(--warn); }
+.dots { display: flex; flex-wrap: wrap; gap: 6px; }
+.dot { min-width: 34px; height: 34px; border-radius: 8px; border: 1px solid var(--rule); background: var(--sheet); color: var(--ink);
+  font: 600 .9rem var(--font-body); font-variant-numeric: tabular-nums; cursor: pointer; }
+.dot.full { background: var(--accent-soft); border-color: var(--accent); }
+.dot[aria-current="true"] { background: var(--accent); border-color: var(--accent); color: var(--sheet); }
+.sheet[hidden] { display: none; }
+.sheet { background: var(--sheet); border: 1px solid var(--rule); border-radius: var(--r); padding: 14px 16px; display: grid; gap: 12px; }
+.sheet header { display: grid; gap: 6px; }
+.say { font: 500 1.2rem/1.7 var(--font-body); }
+.tags { display: flex; gap: 6px; flex-wrap: wrap; }
+.tag { font-size: .75rem; color: var(--muted); border: 1px solid var(--rule); border-radius: 99px; padding: 0 8px; }
+.voice { display: grid; grid-template-columns: auto 1fr; gap: 8px 12px; align-items: start; padding-top: 12px; border-top: 1px solid var(--rule); }
+.voice.done .play { background: var(--accent-soft); }
+.play { width: 52px; height: 52px; border-radius: 50%; border: 2px solid var(--accent); background: transparent; color: var(--accent);
+  font: 700 1.1rem var(--font-head); cursor: pointer; display: grid; place-items: center; }
+.play[aria-pressed="true"] { background: var(--accent); color: var(--sheet); }
+.play:focus-visible, .dot:focus-visible, .nav button:focus-visible, .scale button:focus-visible, .flag:focus-visible {
+  outline: 3px solid var(--accent); outline-offset: 2px; }
+.qs { display: grid; gap: 6px; min-width: 0; }
+.q { display: grid; gap: 4px; }
+.q > span { font-size: .82rem; color: var(--muted); }
+.scale { display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); gap: 4px; max-width: 320px; }
+.scale button { padding: 6px 0; border: 1px solid var(--rule); border-radius: 8px; background: transparent; color: var(--ink);
+  font: 600 1rem var(--font-body); font-variant-numeric: tabular-nums; cursor: pointer; }
+.scale button[aria-checked="true"] { background: var(--accent); border-color: var(--accent); color: var(--sheet); }
+.flags { display: flex; gap: 6px; flex-wrap: wrap; }
+.flag { padding: 4px 10px; border: 1px solid var(--rule); border-radius: 99px; background: transparent; color: var(--ink);
+  font: 400 .85rem var(--font-body); cursor: pointer; }
+.flag[aria-pressed="true"], .flag[aria-checked="true"] { border-color: var(--warn); color: var(--warn); font-weight: 600; }
+.flag.yes[aria-checked="true"] { border-color: var(--accent); color: var(--accent); }
+.nav { display: flex; gap: 10px; justify-content: space-between; }
+.nav button { flex: 1; padding: 12px; border-radius: var(--r); border: 1px solid var(--accent); background: var(--sheet); color: var(--accent);
+  font: 600 1rem var(--font-head); cursor: pointer; }
+.nav button.next { background: var(--accent); color: var(--sheet); }
+.nav button:disabled { opacity: .4; cursor: default; }
+.key { font-size: .8rem; color: var(--muted); }
+details { background: var(--sheet); border: 1px solid var(--rule); border-radius: var(--r); padding: 12px 16px; }
+summary { cursor: pointer; font-weight: 600; }
+textarea { width: 100%; min-height: 120px; margin-top: 10px; font: 12px/1.4 ui-monospace, monospace; direction: ltr;
+  background: var(--paper); color: var(--ink); border: 1px solid var(--rule); border-radius: 8px; padding: 8px; }
+@media (prefers-reduced-motion: no-preference) { .bar > i { transition: width .2s ease-out; } }
+</style>
+
+<main dir="rtl" lang="ar">
+  <header class="lede">
+    <h1>سمّعني سوداني</h1>
+    <p>جملة واحدة في كل صفحة، مقروءة بأصوات مختلفة بترتيب عشوائي وبدون أسماء. اسمع كل صوت وقيّمو، وبعدين «التالية».</p>
+    <p><strong>سوداني؟</strong> ١ = ما سوداني خالص، ٥ = زول سوداني عادي.
+       <strong>طبيعي؟</strong> ١ = آلي ومكسّر، ٥ = زي كلام زول حقيقي.</p>
+  </header>
+
+  <div class="status" role="status">
+    <span><span class="count" id="done">٠</span> من <span class="count" id="total">٠</span> صوت</span>
+    <div class="bar" aria-hidden="true"><i id="fill"></i></div>
+    <span class="save" id="save">بنجهّز الحفظ…</span>
+  </div>
+  <nav class="dots" id="dots" aria-label="الجمل"></nav>
+
+  <div id="sheets"></div>
+
+  <div class="nav">
+    <button type="button" id="prev">السابقة</button>
+    <button type="button" id="next" class="next">التالية</button>
+  </div>
+
+  <details>
+    <summary>نسخة من تقييماتك (لو الحفظ ما اشتغل)</summary>
+    <p class="key">انسخ النص دا وأرسلو في المحادثة.</p>
+    <textarea id="dump" readonly></textarea>
+  </details>
+</main>
+
+<script type="application/json" id="data">__DATA__</script>
+<script>
+(() => {
+  const DATA = JSON.parse(document.getElementById("data").textContent);
+  const N = DATA.sentences.length;
+  const LOCAL = "sdtts-blind-" + DATA.round;
+  const $ = (id) => document.getElementById(id);
+  const AR = "٠١٢٣٤٥٦٧٨٩";
+  const ar = (n) => String(n).replace(/\d/g, (d) => AR[d]);
+  const TAGS = { qaf: "قاف", lexicon: "كلمات سودانية", numbers: "أرقام", codeswitch: "إنجليزي", question: "سؤال", prosody: "نغمة" };
+  const ls = {
+    get(k, d) { try { const v = localStorage.getItem(k); return v == null ? d : JSON.parse(v); } catch (e) { return d; } },
+    set(k, v) { try { localStorage.setItem(k, JSON.stringify(v)); } catch (e) {} },
+  };
+  const ss = {
+    get(k) { try { return Number(sessionStorage.getItem(k)) || 0; } catch (e) { return 0; } },
+    set(k, v) { try { sessionStorage.setItem(k, String(v)); } catch (e) {} },
+  };
+
+  const hot = (window.claude && window.claude.hot && window.claude.hot.data) || {};
+  const ratings = Object.assign({}, ls.get(LOCAL, {}));  // clip key -> {sd, nat, qaf, wrong, at}
+  let idx = Number.isInteger(hot.idx) ? hot.idx : ls.get(LOCAL + "-idx", 0);
+  idx = Math.min(Math.max(0, idx), N - 1);
+  let col = null, progressDoc = null;
+  const chain = {};   // one write at a time per document
+
+  // ---------- render once; afterwards only attributes and text change ----------
+  const paints = {};  // clip key -> function that shows ratings[key] on its controls
+  let total = 0;
+  const sheets = DATA.sentences.map((s, si) => {
+    const sec = document.createElement("section"); sec.className = "sheet"; sec.hidden = si !== idx;
+    sec.setAttribute("aria-label", "الجملة " + ar(si + 1));
+    const h = document.createElement("header");
+    const n = document.createElement("h2"); n.textContent = "الجملة " + ar(si + 1) + " من " + ar(N);
+    const say = document.createElement("p"); say.className = "say"; say.textContent = s.text;
+    const tags = document.createElement("div"); tags.className = "tags";
+    s.tags.forEach((t) => { const x = document.createElement("span"); x.className = "tag"; x.textContent = TAGS[t] || t; tags.append(x); });
+    h.append(n, say, tags); sec.append(h);
+    s.clips.forEach((c, ci) => { total++; sec.append(voice(s, c, ci)); });
+    $("sheets").append(sec);
+    const d = document.createElement("button"); d.type = "button"; d.className = "dot"; d.textContent = ar(si + 1);
+    d.setAttribute("aria-label", "الجملة " + ar(si + 1));
+    d.addEventListener("click", () => go(si));
+    $("dots").append(d);
+    return { sec, dot: d, keys: s.clips.map((c) => c.key) };
+  });
+
+  let playing = null;
+  function voice(s, c, ci) {
+    const key = c.key;
+    const v = document.createElement("div"); v.className = "voice";
+    const audio = new Audio(); audio.preload = "none"; audio.src = c.src;
+    const letter = "أبجدهوزحطي"[ci] || ar(ci + 1);
+    const b = document.createElement("button"); b.className = "play"; b.type = "button"; b.textContent = letter;
+    b.setAttribute("aria-pressed", "false"); b.setAttribute("aria-label", "شغّل الصوت " + letter);
+    b.addEventListener("click", () => {
+      if (playing && playing !== audio) playing.pause();
+      if (audio.paused) { audio.currentTime = 0; audio.play().catch(() => {}); playing = audio; } else audio.pause();
+    });
+    audio.addEventListener("play", () => b.setAttribute("aria-pressed", "true"));
+    ["pause", "ended"].forEach((e) => audio.addEventListener(e, () => b.setAttribute("aria-pressed", "false")));
+
+    const qs = document.createElement("div"); qs.className = "qs";
+    const scales = {};
+    for (const [field, label] of [["sd", "سوداني؟"], ["nat", "طبيعي؟"]]) {
+      const q = document.createElement("div"); q.className = "q";
+      const t = document.createElement("span"); t.textContent = label;
+      const row = document.createElement("div"); row.className = "scale"; row.setAttribute("role", "radiogroup"); row.setAttribute("aria-label", label);
+      scales[field] = [];
+      for (let val = 1; val <= 5; val++) {
+        const x = document.createElement("button"); x.type = "button"; x.setAttribute("role", "radio"); x.textContent = ar(val);
+        x.addEventListener("click", () => change(key, { [field]: val }));
+        scales[field].push(x); row.append(x);
+      }
+      q.append(t, row); qs.append(q);
+    }
+    const fl = document.createElement("div"); fl.className = "flags";
+    const flags = [];
+    const flag = (text, cls, role, isOn, onClick) => {
+      const x = document.createElement("button"); x.type = "button"; x.className = "flag" + (cls ? " " + cls : ""); x.textContent = text;
+      x.setAttribute("role", role); x.addEventListener("click", onClick); fl.append(x); flags.push([x, role, isOn]);
+    };
+    if (s.tags.includes("qaf")) {
+      flag("القاف g صاح", "yes", "radio", (r) => r.qaf === "g", () => change(key, { qaf: "g" }));
+      flag("القاف فصحى q", "", "radio", (r) => r.qaf === "q", () => change(key, { qaf: "q" }));
+    }
+    flag("في كلمة غلط أو ناقصة", "", "switch", (r) => !!r.wrong, () => change(key, { wrong: !(ratings[key] || {}).wrong }));
+    qs.append(fl);
+    v.append(b, qs);
+
+    paints[key] = () => {
+      const r = ratings[key] || {};
+      for (const f of ["sd", "nat"]) scales[f].forEach((x, i) => x.setAttribute("aria-checked", String(r[f] === i + 1)));
+      for (const [x, role, isOn] of flags) x.setAttribute(role === "switch" ? "aria-checked" : "aria-checked", String(isOn(r)));
+      v.classList.toggle("done", !!(r.sd && r.nat));
+    };
+    return v;
+  }
+
+  // ---------- state changes ----------
+  function counts() {
+    let n = 0;
+    sheets.forEach((sh) => {
+      const full = sh.keys.every((k) => ratings[k] && ratings[k].sd && ratings[k].nat);
+      sh.dot.classList.toggle("full", full);
+      n += sh.keys.filter((k) => ratings[k] && ratings[k].sd && ratings[k].nat).length;
+    });
+    $("done").textContent = ar(n); $("total").textContent = ar(total);
+    $("fill").style.width = (total ? 100 * n / total : 0) + "%";
+    $("dump").value = JSON.stringify({ round: DATA.round, ratings });
+  }
+
+  function change(key, patch) {
+    const r = Object.assign({}, ratings[key] || {}, patch, { at: new Date().toISOString() });
+    ratings[key] = r;
+    ls.set(LOCAL, ratings);
+    paints[key](); counts();
+    // save a clip once both scales are set; a flag on its own waits for them
+    if (col && r.sd && r.nat) write(col.doc(key), Object.assign({ round: DATA.round }, r));
+  }
+
+  function write(ref, body) {
+    chain[ref.path] = (chain[ref.path] || Promise.resolve()).then(() => ref.set(body)).then(
+      () => { $("save").textContent = "اتحفظ"; $("save").classList.remove("bad"); },
+      () => { $("save").textContent = "ما اتحفظ: انسخ تقييماتك من تحت"; $("save").classList.add("bad"); });
+  }
+
+  function go(i) {
+    i = Math.min(Math.max(0, i), N - 1);
+    if (playing) playing.pause();
+    if (i !== idx) {
+      idx = i; ls.set(LOCAL + "-idx", idx); ss.set(LOCAL + "-y", 0);
+      if (progressDoc) write(progressDoc, { round: DATA.round, idx, at: new Date().toISOString() });
+    }
+    show();
+    window.scrollTo(0, $("dots").offsetTop - 8);
+  }
+
+  function show() {
+    sheets.forEach((sh, i) => { sh.sec.hidden = i !== idx; sh.dot.setAttribute("aria-current", String(i === idx)); });
+    $("prev").disabled = idx === 0;
+    $("next").textContent = idx === N - 1 ? "خلصت" : "التالية";
+  }
+  $("prev").addEventListener("click", () => go(idx - 1));
+  $("next").addEventListener("click", () => { if (idx < N - 1) go(idx + 1); else { $("save").textContent = "شكراً! " + $("save").textContent; } });
+
+  Object.keys(paints).forEach((k) => paints[k]());
+  counts(); show();
+
+  // the viewer may reload the page (after a save or a republish): come back to the same scroll position
+  const Y = LOCAL + "-y";
+  let tick = 0;
+  window.addEventListener("scroll", () => { if (!tick) tick = setTimeout(() => { tick = 0; ss.set(Y, Math.round(window.scrollY)); }, 150); }, { passive: true });
+  const y = ss.get(Y);
+  if (y) requestAnimationFrame(() => window.scrollTo(0, y));
+  if (window.claude && window.claude.hot && window.claude.hot.snapshot) {
+    try { window.claude.hot.snapshot(() => ({ idx, y: Math.round(window.scrollY) })); } catch (e) {}
+  }
+  if (Number.isFinite(hot.y)) requestAnimationFrame(() => window.scrollTo(0, hot.y));
+
+  // ---------- the store: read once, merge, never rebuild, never write on load ----------
+  (async () => {
+    const timer = setTimeout(() => { if (!col) $("save").textContent = "الحفظ ما جاهز لسه: تقييماتك محفوظة في الجهاز دا"; }, 10000);
+    const db = await (window.claude && claude.use ? claude.use("db") : null);
+    const user = await (window.claude && claude.use ? claude.use("user") : null);
+    const uid = user ? await user.id() : null;
+    if (!db || !uid) { clearTimeout(timer); $("save").textContent = "الحفظ ما متاح هنا: انسخ تقييماتك من تحت"; $("save").classList.add("bad"); return; }
+    const c = db.collection("data/users/" + uid);
+    let first = true;
+    c.onSnapshot((snap) => {
+      clearTimeout(timer);
+      for (const d of snap.docs) {
+        const r = d.data();
+        if (!r || r.round !== DATA.round) continue;
+        if (d.id === "progress") {
+          if (first && Number.isInteger(r.idx) && !Number.isInteger(hot.idx) && r.idx !== idx && r.idx < N) {
+            idx = r.idx; ls.set(LOCAL + "-idx", idx); show();
+          }
+          continue;
+        }
+        if (!paints[d.id]) continue;
+        const mine = ratings[d.id];
+        if (!mine || !mine.at || (r.at && r.at > mine.at)) {
+          ratings[d.id] = { sd: r.sd, nat: r.nat, qaf: r.qaf, wrong: r.wrong, at: r.at };
+          paints[d.id]();
+        }
+      }
+      if (first) {
+        first = false; col = c; progressDoc = c.doc("progress");
+        ls.set(LOCAL, ratings); counts();
+        $("save").textContent = "الحفظ شغّال";
+      } else counts();
+    }, () => { clearTimeout(timer); $("save").textContent = "الحفظ وقف: انسخ تقييماتك من تحت"; $("save").classList.add("bad"); });
+  })();
+})();
+</script>

@@ -1,0 +1,10 @@
+# local side (drivers, tests, page builder); the GPU jobs install their own pinned packages on Kaggle
+kaggle>=1.8
+numpy
+soundfile
+pyloudnorm
+pyarrow
+# only to run jobs/prep_apd_job.py off Kaggle
+torch
+torchaudio
+uroman

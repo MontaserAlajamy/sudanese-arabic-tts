@@ -1,0 +1,50 @@
+{"id": "o01", "text": "يمه… أنا لقيت شغل في الدوحة.", "tashkeel": "يُمَّه… أَنَا لَقِيتْ شُغُلْ فِي الدَّوْحَة.", "source": "owner", "tags": ["lexicon"], "listen": false, "status": "owner-approved"}
+{"id": "o02", "text": "الدوحة؟ ومتين دا؟", "tashkeel": "الدَّوْحَة؟ وَمِتِينْ دَا؟", "source": "owner", "tags": ["question", "lexicon"], "listen": false, "status": "owner-approved"}
+{"id": "o03", "text": "يا جدو… دي فرصة، خليهو يمشي.", "tashkeel": "يَا جِدُّو… دِي فُرْصَة، خَلِّيهُو يِمْشِي.", "source": "owner", "tags": ["lexicon"], "listen": true, "status": "owner-approved"}
+{"id": "o04", "text": "أنا زاتي سافرت زمان… والبلد ما بتطير.", "tashkeel": "أَنَا زَاتِي سَافَرْتَ زَمَانْ… وَالبَلَدْ مَا بِتْطِيرْ.", "source": "owner", "tags": ["lexicon"], "listen": false, "status": "owner-approved"}
+{"id": "o05", "text": "بس… العشا دا، كل جمعة، ما تفوتو.", "tashkeel": "بَسْ… العَشَا دَا، كُلّ جُمْعَة، مَا تَفُوتُو.", "source": "owner", "tags": ["prosody"], "listen": false, "status": "owner-approved"}
+{"id": "o06", "text": "زمان كنت بكتب نفس الكلام عشرة مرات… وكل مرة القاعدين يتبدلوا.", "tashkeel": "زَمَانْ كُنْتَ بَكْتِبْ نَفْسَ الكَلَامْ عَشَرَة مَرَّاتْ… وكُلّ مَرَّة القَاعْدِينْ يِتْبَدَّلُوا.", "source": "owner", "tags": ["qaf", "numbers", "prosody"], "listen": false, "status": "owner-approved"}
+{"id": "o07", "text": "هسع ببني المشهد تلاتي الأبعاد أول: الأوضة، وكل زول في محلو.", "tashkeel": "هَسَّعْ بَبْنِي المَشْهَدْ تُلَاتِي الأَبْعَادْ أَوَّلْ: الأُوضَة، وكُلّ زُولْ فِي مَحَلُّو.", "source": "owner", "tags": ["lexicon"], "listen": true, "status": "owner-approved"}
+{"id": "o08", "text": "تمانية كاميرات… كلهن في جهة واحدة من الخط.", "tashkeel": "تَمَانْيَة كَامِيرَاتْ… كُلَّهِنْ فِي جِهَة وَاحْدَة مِنَ الخَطّ.", "source": "owner", "tags": ["numbers"], "listen": false, "status": "owner-approved"}
+{"id": "o09", "text": "أول مرة اتنين اتبدلوا… لمن كتبت منو قدام منو، جات صاح.", "tashkeel": "أَوَّلْ مَرَّة اتْنِينْ اتْبَدَّلُوا… لَمِّنْ كَتَبْتَ مِنُو قِدَّامْ مِنُو، جَاتْ صَاحْ.", "source": "owner", "tags": ["qaf", "lexicon"], "listen": false, "status": "owner-approved"}
+{"id": "o10", "text": "حجيتكم ما بجيتكم…", "tashkeel": "حَجِّيتْكُمْ مَا بَجِّيتْكُمْ…", "source": "owner", "tags": ["lexicon", "prosody"], "listen": false, "status": "owner-approved"}
+{"id": "o11", "text": "يا حبوبه، الغول دا حقيقة؟", "tashkeel": "يا حَبُّوبَه، الغُولْ دَا حَقِيقَة؟", "source": "owner", "tags": ["qaf", "question"], "listen": false, "status": "owner-approved"}
+{"id": "o12", "text": "أسمع بس… زمان، في بلد جنب البحر…", "tashkeel": "أَسْمَعْ بَسّ… زَمَانْ، فِي بَلَدْ جَنْبْ البَحَرْ…", "source": "owner", "tags": ["prosody"], "listen": false, "status": "owner-approved"}
+{"id": "p01", "text": "الجمرة بتحرق الواطيها.", "source": "proverb", "tags": [], "listen": false, "status": "owner-approved"}
+{"id": "p02", "text": "التسوي كريت في القرض تلقاه في جلدها.", "source": "proverb", "tags": ["qaf"], "listen": true, "status": "owner-approved"}
+{"id": "p03", "text": "الما بعرفك بجهلك.", "source": "proverb", "tags": [], "listen": false, "status": "owner-approved"}
+{"id": "p04", "text": "الفي البر عوام.", "source": "proverb", "tags": [], "listen": false, "status": "owner-approved"}
+{"id": "p05", "text": "إيد على إيد تجدع بعيد.", "source": "proverb", "tags": [], "listen": false, "status": "owner-approved"}
+{"id": "p06", "text": "دخلوها وصقيرها حام.", "source": "proverb", "tags": [], "listen": false, "status": "owner-approved"}
+{"id": "d01", "text": "قال لي الزول دا قاعد في القهوة من الصباح، ما قام لي هسع.", "source": "draft", "tags": ["qaf", "lexicon"], "listen": true, "status": "owner-approved"}
+{"id": "d02", "text": "القطر بقوم الساعة تمانية، قوم بدري عشان ما يفوتك.", "source": "draft", "tags": ["qaf", "numbers"], "listen": true, "status": "owner-approved"}
+{"id": "d03", "text": "أخوي قرا في جامعة الخرطوم، وهسع شغال في السوق العربي.", "source": "draft", "tags": ["qaf", "lexicon"], "listen": false, "status": "owner-approved"}
+{"id": "d04", "text": "الحاجة دي ما بتتقال، أقعد ساكت بس.", "source": "draft", "tags": ["qaf"], "listen": false, "status": "owner-approved"}
+{"id": "d05", "text": "قروشك دي قليلة شديد، ما بتكفي حق المواصلات.", "source": "draft", "tags": ["qaf", "lexicon"], "listen": false, "status": "owner-approved"}
+{"id": "d06", "text": "شنو الحاصل؟ الناس دي ماشة وين بالحيل كدا؟", "source": "draft", "tags": ["question", "lexicon"], "listen": true, "status": "owner-approved"}
+{"id": "d07", "text": "داير أمشي السوق، تمشي معاي ولا قاعد؟", "source": "draft", "tags": ["question", "lexicon", "qaf"], "listen": false, "status": "owner-approved"}
+{"id": "d08", "text": "يا زول، إنت جيت متين من الخرطوم؟", "source": "draft", "tags": ["question", "lexicon"], "listen": true, "status": "owner-approved"}
+{"id": "d09", "text": "الملاح دا سمح شديد، ورينا سويتيهو كيف.", "source": "draft", "tags": ["lexicon"], "listen": false, "status": "owner-approved"}
+{"id": "d10", "text": "أديني موية باردة، الحر دا كتلني عديل.", "source": "draft", "tags": ["lexicon"], "listen": true, "status": "owner-approved"}
+{"id": "d11", "text": "الجنا دا شاطر، بقرا وبكتب براهو.", "source": "draft", "tags": ["lexicon", "qaf"], "listen": false, "status": "owner-approved"}
+{"id": "d12", "text": "ياخ خليك من الشمار دا، ما عندنا زمن.", "source": "draft", "tags": ["lexicon"], "listen": false, "status": "owner-approved"}
+{"id": "d13", "text": "كيفنك؟ إن شاء الله تمام، والأولاد كويسين؟", "source": "draft", "tags": ["question", "lexicon"], "listen": false, "status": "owner-approved"}
+{"id": "d14", "text": "أمبارح مشينا عرس في الحلة، والدلوكة ما وقفت لي الصبح.", "source": "draft", "tags": ["lexicon", "prosody"], "listen": true, "status": "owner-approved"}
+{"id": "d15", "text": "الكسرة بالتقلية دي أكلة ما بتتفوت.", "source": "draft", "tags": ["lexicon", "qaf"], "listen": false, "status": "owner-approved"}
+{"id": "d16", "text": "الركشة وقفت في نص الكبري، وكلو زول قعد يكورك.", "source": "draft", "tags": ["lexicon", "qaf"], "listen": false, "status": "owner-approved"}
+{"id": "d17", "text": "الرغيفة بقت بخمسين جنيه، والكيلو بتلاتة آلاف.", "source": "draft", "tags": ["numbers"], "listen": true, "status": "owner-approved"}
+{"id": "d18", "text": "الاجتماع الساعة عشرة ونص، أوعك تتأخر.", "source": "draft", "tags": ["numbers"], "listen": false, "status": "owner-approved"}
+{"id": "d19", "text": "عندي تلاتة أخوان واتنين أخوات، وأنا الصغير فيهم.", "source": "draft", "tags": ["numbers"], "listen": false, "status": "owner-approved"}
+{"id": "d20", "text": "من بحري لي أمدرمان بتاخد ساعة إلا ربع في الزحمة.", "source": "draft", "tags": ["numbers"], "listen": false, "status": "owner-approved"}
+{"id": "d21", "text": "المباراة انتهت اتنين واحد، والهلال فاز.", "source": "draft", "tags": ["numbers"], "listen": false, "status": "owner-approved"}
+{"id": "d22", "text": "الـ laptop دا قديم، داير أشتري واحد جديد.", "source": "draft", "tags": ["codeswitch", "qaf"], "listen": true, "status": "owner-approved"}
+{"id": "d23", "text": "رسلت ليك الـ link في الواتساب، شوفو وكلمني.", "source": "draft", "tags": ["codeswitch"], "listen": false, "status": "owner-approved"}
+{"id": "d24", "text": "الـ meeting اتأجل لي بكرة، المدير مشغول.", "source": "draft", "tags": ["codeswitch"], "listen": false, "status": "owner-approved"}
+{"id": "d25", "text": "الفيديو دا محتاج editing تاني قبل ما ننزلو.", "source": "draft", "tags": ["codeswitch", "qaf"], "listen": false, "status": "owner-approved"}
+{"id": "d26", "text": "إنت ماشي وين هسع؟", "source": "draft", "tags": ["question"], "listen": false, "status": "owner-approved"}
+{"id": "d27", "text": "منو القال ليك الكلام دا؟", "source": "draft", "tags": ["question", "qaf"], "listen": false, "status": "owner-approved"}
+{"id": "d28", "text": "الحاجة دي بكم؟", "source": "draft", "tags": ["question"], "listen": false, "status": "owner-approved"}
+{"id": "d29", "text": "ليه ما جيت أمبارح؟ كنا مستنينك.", "source": "draft", "tags": ["question"], "listen": false, "status": "owner-approved"}
+{"id": "d30", "text": "لما المطر صب، الشوارع كلها بقت بحر، والعربات قعدت ساي.", "source": "draft", "tags": ["prosody", "qaf"], "listen": false, "status": "owner-approved"}
+{"id": "d31", "text": "حبوبتي كانت بتحكي لينا قصص بالليل، وكنا بننوم قبل ما تكمل.", "source": "draft", "tags": ["prosody", "qaf"], "listen": true, "status": "owner-approved"}
+{"id": "d32", "text": "النيل الأزرق والنيل الأبيض بلتقوا في المقرن، وكل واحد لونو براهو.", "source": "draft", "tags": ["prosody", "qaf"], "listen": false, "status": "owner-approved"}
