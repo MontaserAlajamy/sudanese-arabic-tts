@@ -18,8 +18,8 @@ short_description: Type Sudanese Arabic, hear it spoken (open TTS, v0.1)
 
 # سمّعني سوداني · Sudanese Chatterbox v0.1
 
-Type a sentence in Sudanese Arabic, pick one of four voices, and hear it. Runs on a free CPU, so each sentence
-takes about 30-40 seconds.
+Type a sentence in Sudanese Arabic, pick one of four voices, and hear it from the model before and after our
+Sudanese fine-tuning, side by side. A few seconds on a GPU; about a minute for both on a CPU.
 
 - Model: [MuntasirElagami/sudanese-chatterbox](https://huggingface.co/MuntasirElagami/sudanese-chatterbox) (MIT),
   lahgtna-chatterbox fine-tuned on 4.7 h of open Sudanese speech.

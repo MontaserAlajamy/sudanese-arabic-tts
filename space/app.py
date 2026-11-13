@@ -9,6 +9,7 @@ import os, subprocess, sys, time
 LAHGTNA_REPO = "https://github.com/Oddadmix/lahgtna-chatterbox"
 LAHGTNA_SHA = "433cb74200b55457bffa8ee6965a02ecab546a1c"
 MODEL_REPO = "MuntasirElagami/sudanese-chatterbox"
+BASE_REPO = "oddadmix/lahgtna-chatterbox-v1"  # the same model before our Sudanese fine-tuning
 HERE = os.path.dirname(os.path.abspath(__file__))
 SRC = os.path.join(os.environ.get("LAHGTNA_DIR", "/tmp/lahgtna"))
 MAX_CHARS = 220
@@ -27,6 +28,7 @@ def fetch_lahgtna():
 
 
 fetch_lahgtna()
+import copy
 import gradio as gr
 import numpy as np
 import torch
@@ -40,8 +42,11 @@ _load = torch.load
 torch.load = lambda *a, **k: _load(*a, **{"map_location": DEVICE, **k})  # checkpoints saved on GPU, loaded on CPU
 model = ChatterboxMultilingualTTS.from_pretrained(device=DEVICE)
 torch.load = _load
+# only the T3 part differs between the two models: keep one copy of each, share the rest
+model.t3.load_state_dict(load_file(hf_hub_download(BASE_REPO, "t3_mtl23ls_v2.safetensors"), device=DEVICE))
+T3 = {"base": copy.deepcopy(model.t3).to(DEVICE).eval()}
 model.t3.load_state_dict(load_file(hf_hub_download(MODEL_REPO, "t3_mtl23ls_v2.safetensors"), device=DEVICE))
-model.t3.to(DEVICE).eval()
+T3["ft2"] = model.t3.to(DEVICE).eval()
 
 VOICES = {  # speakers of the Omnilingual ASR corpus (apd_Arab), CC-BY-4.0; not in the training data
     "صوت 1 (أعلى)": "voices/spk05.wav",
@@ -58,6 +63,17 @@ EXAMPLES = [
 ]
 
 
+def speak_one(which, text, voice, seed):
+    model.t3 = T3[which]
+    torch.manual_seed(int(seed))
+    with torch.inference_mode():
+        wav = model.generate(text, language_id="sd", audio_prompt_path=os.path.join(HERE, VOICES[voice]),
+                             exaggeration=0.5, temperature=0.8, cfg_weight=0.5)
+    wav = wav.squeeze().cpu().numpy().astype(np.float32)
+    wav = model.watermarker.apply_watermark(wav, sample_rate=model.sr)
+    return model.sr, np.clip(wav, -1, 1)
+
+
 def speak(text, voice, seed):
     text = " ".join((text or "").split())
     if not text:
@@ -65,21 +81,18 @@ def speak(text, voice, seed):
     if len(text) > MAX_CHARS:
         raise gr.Error(f"الجملة طويلة: الحد {MAX_CHARS} حرف. قسّمها لجمل أقصر.")
     t0 = time.time()
-    torch.manual_seed(int(seed))
-    with torch.inference_mode():
-        wav = model.generate(text, language_id="sd", audio_prompt_path=os.path.join(HERE, VOICES[voice]),
-                             exaggeration=0.5, temperature=0.8, cfg_weight=0.5)
-    wav = wav.squeeze().cpu().numpy().astype(np.float32)
-    wav = model.watermarker.apply_watermark(wav, sample_rate=model.sr)
-    print(f"{len(text)} chars -> {len(wav) / model.sr:.1f} s audio in {time.time() - t0:.0f} s", flush=True)
-    return model.sr, np.clip(wav, -1, 1)
+    before = speak_one("base", text, voice, seed)
+    after = speak_one("ft2", text, voice, seed)
+    print(f"{len(text)} chars -> both models in {time.time() - t0:.0f} s", flush=True)
+    return before, after
 
 
 INTRO = """
 # سمّعني سوداني · Sudanese Chatterbox v0.1
-اكتب جملة باللهجة السودانية، اختار صوت، واضغط «اتكلم». · Type Sudanese Arabic, pick a voice, press the button.
+اكتب جملة باللهجة السودانية، اختار صوت، واضغط «اتكلم»: بتسمع نفس الجملة من النموذج **قبل** التدريب و**بعد** تدريبنا على الكلام السوداني.
+Type Sudanese Arabic, pick a voice: hear the same sentence from the model **before** and **after** our Sudanese fine-tuning.
 
-النسخة المجانية بتشتغل على معالج عادي، فالجملة الواحدة بتاخد حوالي نص دقيقة. · Free CPU: about 30-40 s per sentence.
+على GPU بتاخد ثواني، وعلى معالج عادي حوالي دقيقة للاتنين. · A few seconds on a GPU; about a minute for both on a CPU.
 """
 ABOUT = """
 **Model** [MuntasirElagami/sudanese-chatterbox](https://huggingface.co/MuntasirElagami/sudanese-chatterbox) (MIT) ·
@@ -101,10 +114,11 @@ with gr.Blocks(title="Sudanese Chatterbox") as demo:
             seed = gr.Number(value=7, precision=0, label="Seed (غيّرو عشان تسمع نسخة تانية)")
             go = gr.Button("اتكلم", variant="primary")
         with gr.Column():
-            out = gr.Audio(label="الصوت", type="numpy", autoplay=True)
+            before = gr.Audio(label="قبل التدريب · before (lahgtna-chatterbox)", type="numpy")
+            after = gr.Audio(label="بعد التدريب · after (Sudanese Chatterbox v0.1)", type="numpy")
     gr.Examples(EXAMPLES, [text, voice], label="أمثلة")
     gr.Markdown(ABOUT)
-    go.click(speak, [text, voice, seed], out, concurrency_limit=1)
+    go.click(speak, [text, voice, seed], [before, after], concurrency_limit=1)
 
 if __name__ == "__main__":
     demo.queue(max_size=20).launch(theme=gr.themes.Soft(), share=os.environ.get("SHARE") == "1")
