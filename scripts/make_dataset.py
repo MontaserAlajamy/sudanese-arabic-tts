@@ -96,8 +96,8 @@ configs:
 
 {t['clips']:,} clips ({t['hours']:.2f} h) of spontaneous **Sudanese Arabic** from {t['speakers']} speakers, cut into
 1-14 s pieces at natural pauses (median about 8 s) by word-level forced alignment, 24 kHz mono FLAC, each with its transcript.
-As far as we could find (census, November 2026), this is the only openly licensed Sudanese speech, and it was not
-in a TTS-ready form before.
+As far as we could find (November 2026), it is the only Sudanese speech with a clear open licence that allows
+commercial use (other sets state no licence or are non-commercial), and it was not in a TTS-ready form before.
 
 ## Source and licence
 Derived from the Sudanese Arabic (`apd_Arab`) part of the **Omnilingual ASR Corpus** by the Omnilingual ASR Team,

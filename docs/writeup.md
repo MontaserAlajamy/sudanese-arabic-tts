@@ -26,8 +26,9 @@ community fine-tunes from the lahgtna project. One of them (MIT-licensed) had th
 11 of 12 sentences.
 
 ## 3. The data
-The only openly licensed Sudanese speech I could find is the Sudanese part of Meta's Omnilingual ASR Corpus
-(CC-BY-4.0): 12 speakers, about 10 hours of spontaneous talk in long takes. I force-aligned every transcript
+Other Sudanese speech sets exist on Hugging Face (Lisan, arbml), but they state no licence, and one more is
+non-commercial only. The only one I found with a clear open licence that allows any use is the Sudanese part of
+Meta's Omnilingual ASR Corpus (CC-BY-4.0): 12 speakers, about 10 hours of spontaneous talk in long takes. I force-aligned every transcript
 word by word and cut it at natural pauses into 3,807 clips (8.8 h), cutting out hesitations and half-words
 rather than leaving them in. The train speakers and the benchmark speakers never overlap.
 
